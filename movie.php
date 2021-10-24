@@ -38,7 +38,7 @@ ini_set("error_log", "/tmp/php-error.log");
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header navbar-defalt">
-                <a class="navbar-brand" href="index.php">Akshay's CS143 DataBase Query System</a>
+                <a class="navbar-brand" href="./index.php">Akshay's CS143 DataBase Query System</a>
             </div>
         </div>
     </nav>
@@ -77,7 +77,7 @@ ini_set("error_log", "/tmp/php-error.log");
         $rs = $db->query($query);
 
         while ($row = $rs->fetch_assoc()) {
-            $actorUrl = "actor.php?id=" . $row['aid'];
+            $actorUrl = "./actor.php?id=" . $row['aid'];
             echo "<tr>";
             echo "<th><a href='$actorUrl'>" . $row["first"] . " " . $row["last"] . "</a></th>";
             echo "<th>\"" . $row['role'] . "\"</th>";
@@ -92,7 +92,7 @@ ini_set("error_log", "/tmp/php-error.log");
         $query = "select AVG(rating) avg_rating, COUNT(rating) num_ratings from Review where mid = " . $movieID;
         $rs = $db->query($query);
         $row = $rs->fetch_assoc();
-        $movieUrl = "review.php?id=" . $movieID;
+        $movieUrl = "./review.php?id=" . $movieID;
         if (isset($row)) {
             echo "<a href='$movieUrl'>By now, nobody ever rates this movie. Be the first one to give a review </a><br>";
         } else {
@@ -141,8 +141,7 @@ ini_set("error_log", "/tmp/php-error.log");
 
         showUserReviews($movieID, $db);
     }
-
-
+    $db->close();
     ?>
 
 </body>

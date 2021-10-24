@@ -39,7 +39,7 @@ ini_set("error_log", "/tmp/php-error.log");
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header navbar-defalt">
-                <a class="navbar-brand" href="index.php">Akshay's CS143 DataBase Query System</a>
+                <a class="navbar-brand" href="./index.php">Akshay's CS143 DataBase Query System</a>
             </div>
         </div>
     </nav>
@@ -98,7 +98,7 @@ ini_set("error_log", "/tmp/php-error.log");
                 <th> Movie Title </th>
             </tr>";
         while ($row = $rs->fetch_assoc()) {
-            $movieUrl = "movie.php?id=" . $row['movieId'];
+            $movieUrl = "./movie.php?id=" . $row['movieId'];
             echo "<tr>";
             echo "<th>\"" . $row['role'] . "\"</th>";
             echo "<th> <a href='$movieUrl'>" . $row['title'] . "</a></th>";
@@ -111,6 +111,7 @@ ini_set("error_log", "/tmp/php-error.log");
     showActorInformation($actorID, $db);
     echo "<h3>Actor's Movies and Role: <br> </h3>";
     showActorRoles($actorID, $db);
+    $db->close();
     ?>
 
 </body>
