@@ -90,9 +90,22 @@ ini_set("error_log", "/tmp/php-error.log");
         echo "</table>";
     }
 
-    function showUserReview($movieID, $db):
+    function showUserStats($movieID, $db)
     {
-        
+        $query = "select AVG(rating) avg_rating, COUNT(rating) num_ratings from Review where mid = " . $movieID;
+        $rs = $db->query($query);
+        $row = $rs->fetch_assoc();
+        $movieUrl = "review.php?id=" . $movieID;
+        if (is_null($row["avg_rating"])) {
+            echo "<a href='$movieUrl'>By now, nobody ever rates this movie. Be the first one to give a review </a><br>";
+        } else {
+            echo "Average score for this Movie is " . $row["avg_rating"] . "/5 based on " . $row["num_ratings"] . " people's reviews <br>";
+            echo "<a href='$movieUrl'>Leave your review as well!</a><br>";
+        }
+    }
+
+    function showUserReviews($movieID, $db)
+    {
     }
 
     echo "<h3>Movie Information is: <br> </h3>";
@@ -101,8 +114,11 @@ ini_set("error_log", "/tmp/php-error.log");
     echo "<h3>Actors in this Movie: <br> </h3>";
     showMovieActors($movieID, $db);
 
+    echo "<h3>User Review :<br></h3>";
+    showUserStats($movieID, $db);
 
-    echo "<h3>User Review :<br></h3";
+    echo "<h3>Comment detials shown below :<br></h3>";
+    showUserReviews($movieID, $db);
 
 
     ?>
